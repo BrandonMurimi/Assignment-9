@@ -88,7 +88,6 @@ classDiagram
     Activity "1..*" -- "1" Report : "included in"
     Goal "1" -- "1..*" Activity : "tracks progress"
     User "1" -- "0..*" Notification : "receives"
-
     %% Composition/Strong Aggregation
     Report *-- Activity : "contains"
 
