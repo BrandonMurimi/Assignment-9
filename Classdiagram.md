@@ -1,5 +1,5 @@
 classDiagram
-    %% Main Classes with Detailed Members
+ Main Classes with Detailed Members
     class User {
         <<Entity>>
         -userId: String
