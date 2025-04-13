@@ -1,5 +1,4 @@
-
-![Editor _ Mermaid Chart-2025-04-13-212527](https://github.com/user-attachments/assets/4e4b4a59-d8c0-428e-92b9-c0eea8e683d5)
+github.com/user-attachments/assets/4e4b4a59-d8c0-428e-92b9-c0eea8e683d5)
 
 
 ## 2. UML Class Diagram (Mermaid.js)
