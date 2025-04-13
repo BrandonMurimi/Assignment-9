@@ -1,6 +1,5 @@
-UML Class Diagram (Mermaid.js)
-
-mermaid
+## 2. UML Class Diagram (Mermaid.js)
+```mermaid
 classDiagram
     class UserAccount {
         +String userID
@@ -82,4 +81,10 @@ classDiagram
     ForecastRequest --> "1" Location : requests
     ForecastRequest --> "1" UserAccount : initiated by
     Sensor --> "1" WeatherStation : belongs to
-    WeatherReport --> "1" Location : linked to
+    WeatherReport --> "1" Location : linked to
+```
+
+### 💡 Design Rationale
+- **Encapsulation:** Attributes and methods are grouped logically per entity.
+- **Relationships:** Arrows express multiplicity and direction (e.g., one station has many sensors).
+- **Traceability:** Reflects entity relationships in the domain model and system behavior.
