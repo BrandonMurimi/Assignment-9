@@ -1,62 +1,70 @@
 classDiagram
-    %% Main Classes
+    %% Health Tracker Class Diagram
+    direction TB
+    
     class User {
+        <<Main Entity>>
         -userId: String
         -name: String
         -email: String
-        -fitnessLevel: Enum
+        -fitnessLevel: Enum[Beginner,Intermediate,Advanced]
         +register()
         +updateProfile()
         +addDevice()
+        +removeDevice()
     }
 
     class Activity {
+        <<Entity>>
         -activityId: String
-        -type: Enum
+        -type: Enum[Run,Swim,Cycle]
         -startTime: DateTime
-        -duration: Int
+        -caloriesBurned: Float
         +startTracking()
+        +pauseTracking()
         +stopTracking()
-        +calculateCalories()
     }
 
     class Goal {
+        <<Entity>>
         -goalId: String
-        -targetValue: Float
+        -target: Float
         -deadline: Date
+        -progress: Float
         +updateProgress()
         +checkCompletion()
-        +sendNotification()
+        +generateMotivation()
     }
 
     class Device {
+        <<Entity>>
         -deviceId: String
-        -manufacturer: String
-        -connectionType: Enum
+        -name: String
+        -lastSync: DateTime
         +pair()
         +sync()
-        +checkBattery()
+        +disconnect()
     }
 
     class Report {
+        <<Value Object>>
         -reportId: String
-        -generationDate: DateTime
-        +generateWeekly()
-        +exportPDF()
-        +sendByEmail()
+        -period: Enum[Weekly,Monthly]
+        +generate()
+        +export(format: String)
     }
 
     %% Relationships
-    User "1" -- "0..3" Device : "uses"
-    User "1" -- "1..*" Activity : "logs"
-    User "1" -- "0..*" Goal : "sets"
-    Activity "1..*" -- "0..*" Report : "included in"
-    Goal "1" -- "1..*" Activity : "tracks progress"
+    User "1" --> "0..3" Device : "uses"
+    User "1" --> "1..*" Activity : "logs"
+    User "1" --> "0..5" Goal : "sets"
+    Activity "1..*" --> "0..1" Report : "included in"
+    Goal "1" --> "1..*" Activity : "tracks"
 
     %% Composition
-    Report *-- Activity : "contains"
+    Report *-- Activity : contains
 
     %% Notes
-    note for User "Maximum 3 devices\nper user (FR-004)"
-    note for Activity "Auto-stops after\n24h (UC-102)"
-    note for Goal "Notifies at 50%/90%\nprogress (UC-203)"
+    note for User "Max 3 devices per user\n(FR-004 from Assignment 4)"
+    note for Activity "Auto-archives after 1 year\n(NFR-001)"
+    note for Goal "Notifies at 50%/90% progress\n(UC-203 from Assignment 5)"
