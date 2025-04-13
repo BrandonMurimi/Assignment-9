@@ -1,106 +1,51 @@
- UML Class Diagram (Mermaid.js)
 
-![Editor _ Mermaid Chart-2025-04-13-212527](https://github.com/user-attachments/assets/33d46e48-7de2-4b06-989d-cb37bf0ac732)
+## UML Class Diagram (Mermaid.js)
 
-//classDiagram
-    %% Main Classes with Detailed Members
+```mermaid
+classDiagram
     class User {
-        <<Entity>>
-        -userId: String
-        -name: String
-        -email: String
-        -passwordHash: String
-        -fitnessLevel: Enum(Beginner, Intermediate, Advanced)
-        -birthDate: Date
-        +register(email: String, password: String): Boolean
-        +login(credentials: String): Session
-        +updateProfile(name: String, level: Enum): void
-        +addDevice(device: Device): Boolean
-        +removeDevice(deviceId: String): void
+        -String id
+        -String name
+        -String email
+        -String fitnessLevel
+        +register()
+        +updateProfile()
+        +addDevice()
     }
 
     class Activity {
-        <<Entity>>
-        -activityId: String
-        -type: Enum(Running, Swimming, Cycling)
-        -startTime: DateTime
-        -endTime: DateTime
-        -caloriesBurned: Float
-        -heartRate: Int[]
-        +startTracking(): void
-        +stopTracking(): void
-        +pauseTracking(): void
-        +calculateCalories(): Float
-        +exportGPX(): File
+        -String id
+        -String type
+        -DateTime startTime
+        -Float calories
+        +startTracking()
+        +stopTracking()
     }
 
     class Goal {
-        <<Entity>>
-        -goalId: String
-        -targetValue: Float
-        -currentValue: Float
-        -deadline: Date
-        -isAchieved: Boolean
-        +updateProgress(value: Float): void
-        +checkCompletion(): Boolean
-        +extendDeadline(days: Int): void
-        +getProgressPercentage(): Float
+        -String id
+        -Float target
+        -Date deadline
+        +updateProgress()
+        +checkCompletion()
     }
 
     class Device {
-        <<Entity>>
-        -deviceId: String
-        -manufacturer: String
-        -model: String
-        -connectionType: Enum(Bluetooth, WiFi)
-        -firmwareVersion: String
-        -batteryLevel: Int
-        +pair(): Boolean
-        +sync(): ActivityData[]
-        +checkBattery(): Int
-        +updateFirmware(): Boolean
+        -String id
+        -String manufacturer
+        +pair()
+        +sync()
     }
 
     class Report {
-        <<ValueObject>>
-        -reportId: String
-        -period: Enum(Weekly, Monthly)
-        -creationDate: DateTime
-        -metrics: Map~String, Object~
-        +generate(userId: String): void
-        +export(format: Enum(PDF, CSV)): File
-        +sendByEmail(recipient: String): Boolean
+        -String id
+        -String period
+        +generate()
+        +export()
     }
 
-    class Notification {
-        <<Service>>
-        -notificationId: String
-        -type: Enum(Email, Push)
-        -content: String
-        +send(user: User): Boolean
-        +schedule(time: DateTime): void
-        +logDelivery(): void
-    }
-
-    %% Relationships with Multiplicity
-    User "1" -- "0..3" Device : "uses"
-    User "1" -- "1..*" Activity : "logs"
-    User "1" -- "0..*" Goal : "sets"
-    Activity "1..*" -- "1" Report : "included in"
-    Goal "1" -- "1..*" Activity : "tracks progress"
-    User "1" -- "0..*" Notification : "receives"
-
-    %% Composition/Strong Aggregation
-    Report *-- Activity : "contains"
-
-    %% Dependency
-    Notification ..> User : "depends on"
-    Notification ..> Goal : "listens to"
-
-    %% Notes for Business Rules
-    note for User "Max 3 devices per user (FR-004)\nPassword encryption (NFR-002)"
-    note for Activity "Auto-stop after 24h (UC-102)\nMin 5min duration (BR-205)"
-    note for Goal "Daily progress updates (UC-203)\n5% tolerance for achievement (BR-307)"
-
-    %% Stereotypes
-    note for Notification : <<Service>>\nHandles all system notifications
+    User "1" -- "0..3" Device : uses
+    User "1" -- "*" Activity : performs
+    User "1" -- "*" Goal : sets
+    Report *-- Activity : contains
+    Goal ..> Activity : tracks
