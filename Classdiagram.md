@@ -1,4 +1,4 @@
-## 2. UML Class Diagram (Mermaid.js)
+UML Class Diagram (Mermaid.js)
 
 mermaid
 classDiagram
