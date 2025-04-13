@@ -1,3 +1,8 @@
+
+
+
+
+
 ## 2. UML Class Diagram (Mermaid.js)
 ```mermaid
 
@@ -88,9 +93,9 @@ classDiagram
     Activity "1..*" -- "1" Report : "included in"
     Goal "1" -- "1..*" Activity : "tracks progress"
     User "1" -- "0..*" Notification : "receives"
+-
     %% Composition/Strong Aggregation
     Report *-- Activity : "contains"
-
     %% Dependency
     Notification ..> User : "depends on"
     Notification ..> Goal : "listens to"
