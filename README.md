@@ -17,3 +17,8 @@ Blueprint for development (clean OOP structure)
 Validation against user stories and requirements
 
 Agile synergy with earlier assignments
+
+Related Assignments
+Assignment 4: Functional Requirements → mapped to entities and rules
+Assignment 6: User Stories & Sprint Tasks → reflected in methods
+Assignment 8: Object State & Activity Diagrams → align with domain entities
